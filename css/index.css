@@ -30,18 +30,7 @@ body {
 }
 
 
-/*Setup the font and tinter*/
-#tinter {
-	position: absolute;
-	top: 0;
-	left: 0;
-
-	height: 100%;
-	width: 100%;
-
-	background-color: #000;
-	opacity: 0.4;
-}
+/*setup main container*/
 
 #main_container {
 	position: absolute;
@@ -51,7 +40,8 @@ body {
 	top: 0;
 	background-color: #F5F1ED;
 	height: 100%;
-	width: 65%;
+	max-width: 65%;
+	min-width: 800px;
 }
 
 /*Title*/
@@ -73,7 +63,6 @@ body {
 	height: 40px;
 	background-color: #DAD2BC;
 	font-size: 30px;
-	font-weight: 600;
 	margin-top: -40px;
 }
 
@@ -115,4 +104,60 @@ body {
 #pop {
 	position: absolute;
 	right: 10%;
+}
+
+/*Event container*/
+#event_box {
+	position: absolute;
+	height: 40%;
+	width: 87%;
+	
+	margin: 0 auto;
+	margin-top: 4%;
+	right: 0;
+	left: 0;
+
+	border: 3px solid #252323;
+	background-image: url("../img/background_pape.png");
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+#tinter {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	height: 100%;
+	width: 100%;
+
+	background-color: #000;
+	opacity: 0.6;
+}
+
+#event_content {
+	position: absolute;
+	height: 40%;
+	width: 87%;
+	margin: 0 auto;
+	margin-top: 4%;
+	right: 0;
+	left: 0;
+}
+
+#event_title {
+	position: absolute;
+	margin: 0 auto;
+	right: 0;
+	left: 0;
+	margin-top: 20px;
+
+	width: 160px;
+	
+	font-size: 25px;
+	border: 3px solid #fff;
+	color: #F5F1ED;
+	padding: 5px;
 }
