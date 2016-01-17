@@ -1,6 +1,17 @@
+/*General settings and fonts*/
 @font-face {
 	font-family: Gidoli;
 	src: url("../fonts/GidoleFont/Gidole-Regular.ttf");
+}
+
+@font-face {
+	font-family: Jaapokki;
+	src: url("../fonts/Jaapokki/Regular/web/jaapokki-regular.ttf");
+}
+
+@font-face {
+	font-family: Jaapokki-Enhanced;
+	src: url("../fonts/Jaapokki/enchance/web/jaapokkienchance-regular.ttf");
 }
 
 * {
@@ -17,6 +28,8 @@ body {
 	overflow: hidden;
 }
 
+
+/*Setup the font and tinter*/
 #tinter {
 	position: absolute;
 	top: 0;
@@ -37,5 +50,17 @@ body {
 	top: 0;
 	background-color: #F5F1ED;
 	height: 100%;
-	width: 70%;
+	width: 65%;
+}
+
+/*Title*/
+#title {
+	margin-top: 10px;
+	text-align: center;
+	font-family: Jaapokki;
+	font-size: 50px;
+}
+
+#font-enhance {
+	font-family: Jaapokki-Enhanced;
 }
