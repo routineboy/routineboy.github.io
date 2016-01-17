@@ -1,0 +1,41 @@
+@font-face {
+	font-family: Gidoli;
+	src: url("../fonts/GidoleFont/Gidole-Regular.ttf");
+}
+
+* {
+	font-family: Gidoli;
+}
+
+body {
+	background: url('../img/background_pape_2.png') no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+
+	overflow: hidden;
+}
+
+#tinter {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	height: 100%;
+	width: 100%;
+
+	background-color: #000;
+	opacity: 0.4;
+}
+
+#main_container {
+	position: absolute;
+	margin: 0 auto;
+	right: 0;
+	left: 0;
+	top: 0;
+	background-color: #F5F1ED;
+	height: 100%;
+	width: 70%;
+}
