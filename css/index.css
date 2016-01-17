@@ -16,6 +16,7 @@
 
 * {
 	font-family: Gidoli;
+	color: #252323;
 }
 
 body {
@@ -63,4 +64,55 @@ body {
 
 #font-enhance {
 	font-family: Jaapokki-Enhanced;
+}
+
+/*header container*/
+#header_container {
+	position: absolute;
+	width: 100%;
+	height: 40px;
+	background-color: #DAD2BC;
+	font-size: 30px;
+	font-weight: 600;
+	margin-top: -40px;
+}
+
+#text_container {
+	margin-top: 2px;
+	margin-left: 5px;
+}
+
+#crops {
+	margin-left: 10%;
+}
+
+/*crops*/
+#crops:hover {
+	border-bottom: 3px solid #D7263D;
+	cursor: pointer;
+}
+
+/*lab*/
+#lab {
+	margin-left: 30px;
+	cursor: pointer;
+}
+
+#lab:hover {
+	border-bottom: 3px solid #0496FF;
+}
+
+/*Store*/
+#store {
+	margin-left: 30px;
+	cursor: pointer;
+}
+
+#store:hover {
+	border-bottom: 3px solid #0CEE6B;
+}
+
+#pop {
+	position: absolute;
+	right: 10%;
 }
