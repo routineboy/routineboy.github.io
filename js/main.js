@@ -1,9 +1,10 @@
-var crop_array = [["wheat", "carb", 1, 3, 30, 100], ["barley", "carb", 0, 3, 30, 100], ["corn", "carb", 0, 3, 30, 100], ["cucumber", "veg", 0, 3, 30, 100], ["tomato", "veg", 0, 3, 30, 100], ["lettuce", "veg", 0, 3, 30, 100], ["bean", "protein", 0, 3, 30, 100], ["peanut",  "protein", 0, 3, 30, 100], ["green_pea", "protein", 0, 3, 30, 100]]
 var gmo_array = [];
+var crop_array = [["wheat", "carb", 1, 3, 3000, 100, 1], ["barley", "carb", 0, 3, 3000, 100, 0], ["corn", "carb", 0, 3, 3000, 100, 0], ["cucumber", "veg", 1, 3, 3000, 100, 1], ["tomato", "veg", 0, 3, 3000, 100, 0], ["lettuce", "veg", 0, 3, 3000, 100, 0], ["bean", "protein", 1, 3, 3000, 100, 1], ["peanut",  "protein", 0, 3, 3000, 100, 0], ["green_pea", "protein", 0, 3, 3000, 100, 0]]
 var events = ["Hello and welcome to the GMO game. In this world many bad things can happen to your crops, and this event box tells you exactly whats happening. So check this place out every once in a while."];
 
 var population = 2;
 var money = 1000000000000000;
+var intervals = [];
 
 function parse_dna(dna) {
 	type = dna_split[0];
@@ -225,6 +226,7 @@ function parse_dna(dna) {
 	gmo_crop = [];
 	gmo_crop.push($("#gmo_name").val());
 
+
 	if (type == 001) {
 		gmo_crop.push("carb");
 	} else if (type == 002) {
@@ -265,7 +267,7 @@ function parse_dna(dna) {
 	production_costs = parseInt(production_costs, 10);
 	production_costs = production_costs * 10;
 	gmo_crop.push(production_costs);
-
+	gmo_crop.push(0);
 }
 
 function show_events() {
@@ -287,7 +289,7 @@ function generate_gmos() {
 
 	x = 0
 	while (x < gmo_array.length) {
-		$("#gmo_container").append("<div id='" + gmo_array[x][0] + "_" + x + "' class='gmo_item'><p id='" + gmo_array[x][0] + "_text' class='gmo_item_text'>&nbsp" + gmo_array[x][0] + ":&nbsp&nbsp&nbspFeeding ratio: 1:" + gmo_array[x][3] + "&nbsp&nbsp&nbspharvest time: " + gmo_array[x][4] + "s&nbsp&nbsp&nbsp" + gmo_array[x][0] + " bundles in stock: " + gmo_array[x][2] + "</p></div>");
+		$("#gmo_container").append("<div id='" + gmo_array[x][0] + "_" + x + "' class='gmo_item'><p id='" + gmo_array[x][0] + "_text' class='gmo_item_text'>&nbsp" + gmo_array[x][0] + ":&nbsp&nbsp&nbspFeeding ratio: 1:" + gmo_array[x][3] + "&nbsp&nbsp&nbspharvest time: " + gmo_array[x][4] + "ms&nbsp&nbsp&nbsp" + gmo_array[x][0] + " bundles in stock: " + gmo_array[x][2] + "</p></div>");
 
 		if (gmo_array[x][1] == "carb") {
 			$("#" + gmo_array[x][0]  + "_text").css("color", "#D87722");
@@ -308,7 +310,7 @@ function generate_crops() {
 	
 	x = 0
 	while (x < crop_array.length) {
-		$("#crop_container").append("<div id='" + crop_array[x][0] + "_" + x + "' class='crop_item'><p id='" + crop_array[x][0] + "_text' class='crop_item_text'>&nbsp" + crop_array[x][0] + ":&nbsp&nbsp&nbspFeeding ratio: 1:" + crop_array[x][3] + "&nbsp&nbsp&nbspharvest time: " + crop_array[x][4] + "s&nbsp&nbsp&nbsp" + crop_array[x][0] + " bundles in stock: " + crop_array[x][2] + "</p></div>");
+		$("#crop_container").append("<div id='" + crop_array[x][0] + "_" + x + "' class='crop_item'><p id='" + crop_array[x][0] + "_text' class='crop_item_text'>&nbsp" + crop_array[x][0] + ":&nbsp&nbsp&nbspFeeding ratio: 1:" + crop_array[x][3] + "&nbsp&nbsp&nbspharvest time: " + crop_array[x][4] + "ms&nbsp&nbsp&nbsp" + crop_array[x][0] + " bundles in stock: " + crop_array[x][2] + "</p></div>");
 
 		if (crop_array[x][1] == "carb") {
 			$("#" + crop_array[x][0]  + "_text").css("color", "#D87722");
@@ -323,10 +325,80 @@ function generate_crops() {
 	}
 }
 
+function generate_counter() {
+	$(".menu").append("<div id='counter_container'></div>");
+
+	setInterval(function() {
+		$("#counter_container > *").remove();
+		x = 0;
+		while (x < crop_array.length) {	
+
+			$("#counter_container").append("<div id='" + crop_array[x][0] + "' class='counter_item'><p id='" + crop_array[x][0] + "_text' class='counter_item_text'>" + crop_array[x][0] + ": " + crop_array[x][6] + "</p></div>")
+
+			if (x == 0) {
+				$("#"+crop_array[x][0]).css("border-top", "2px solid #252323");
+				$("#"+crop_array[x][0]).css("padding", "5px");
+				$("#"+crop_array[x][0] + "_text").css("margin-top", "10px");
+				$("#"+crop_array[x][0] + "_text").css("margin-left", "-5px");
+			}
+
+			if (crop_array[x][1] == "carb") {
+				$("#" + crop_array[x][0]  + "_text").css("color", "#D87722");
+
+			} else if (crop_array[x][1] == "veg") {
+				$("#" + crop_array[x][0]  + "_text").css("color", "#068939");
+
+			} else if (crop_array[x][1] == "protein") {
+				$("#" + crop_array[x][0]  + "_text").css("color", "#B5171C");
+			}
+			x++;
+		}	
+	}, 1000);
+}
+
+function game_loop_generator(array_index) {
+	setInterval(function() {
+		bundle_number = crop_array[array_index][2];
+		ratio = crop_array[array_index][3];
+
+		incrementer = bundle_number * ratio;
+
+		if (bundle_number > 0) {
+			crop_array[array_index][6] = crop_array[array_index][6] + incrementer;
+		}
+
+	}, crop_array[array_index][4]);
+}
+
+function human_loop_generator() {
+	/*food consumption*/
+	setInterval(function() {
+		
+	}, 10000);
+
+	/*money making*/
+	setInterval(function() {
+
+	});
+
+	/*reproduction*/
+	setInterval(function() {
+
+	});	
+
+}
+
 $(document).ready(function() {
 	$("#pop").append("Population: " + String(population));
+	generate_counter();
+	human_loop_generator();
 	show_events();
 
+	x = 0;
+	while (x < crop_array.length) {
+		game_loop_generator(x);
+		x++;
+	}
 
 	/*Main menu*/
 	$("#title").click(function() {
@@ -336,6 +408,7 @@ $(document).ready(function() {
 		$("#event_box").append("<div id='tinter'></div>");
 		$("#event_content").append("<p id='event_title'>Recent Events</p>'");
 		show_events();
+		generate_counter();
 	});
 
 	/*CROP menu*/
@@ -361,6 +434,7 @@ $(document).ready(function() {
 				total = crop_array[array_index][5] * parseInt(amount);
 				money = money - total;
 				crop_array[array_index][2] = crop_array[array_index][2] + parseInt(amount);
+				crop_array[array_index][6] = 1;
 				events.push("You purchased $" + String(total) + " worth of '" + crop_array[array_index][0] + "' bundles");
 			}
 
@@ -397,9 +471,11 @@ $(document).ready(function() {
 			dna_split = [dna_split[0], dna_split[1], dna_split[2], dna_split[3]];
 			parse_dna(dna_split);
 			generate_gmos();
+
 		} else {
 			parse_dna(dna_split);
 			generate_gmos();
+			console.log(gmo_array);
 		}
 
 	});
@@ -418,6 +494,19 @@ $(document).ready(function() {
 				new_crop = gmo_array[array_index];
 				crop_array.push(new_crop);
 				events.push("You just created '" + gmo_name + "' for $1000");
+
+				for (var i = 1; i < 99999; i++) {
+				    window.clearInterval(i);
+				    window.clearTimeout(i);
+				}
+
+				x = 0;
+				while (x < crop_array.length) {
+
+					game_loop_generator(x);
+					x++;
+				}				
+
 				delete(gmo_array[array_index]);
 			} else {
 				alert("YOUR TO POOR!");
@@ -458,6 +547,19 @@ $(document).ready(function() {
 							crop_array[x][3] = crop_array[x][3] * 2;
 							money = money - store_array[array_index][1];
 							events.push("You added the '" + item_name + "' GMO to your '" + crop_array[x][0] + "' crop");
+
+							for (var i = 1; i < 99999; i++) {
+							    window.clearInterval(i);
+							    window.clearTimeout(i);
+							}
+
+							y = 0;
+							while (y < crop_array.length) {
+
+								game_loop_generator(y);
+								y++;
+							}	
+
 							alert("Added gmo");
 						}
 
@@ -471,6 +573,19 @@ $(document).ready(function() {
 							crop_array[x][3] = crop_array[x][3] * 4;
 							money = money - store_array[array_index][1];
 							events.push("You added the '" + item_name + "' GMO to your '" + crop_array[x][0] + "' crop");
+
+							for (var i = 1; i < 99999; i++) {
+							    window.clearInterval(i);
+							    window.clearTimeout(i);
+							}
+
+							y = 0;
+							while (y < crop_array.length) {
+
+								game_loop_generator(y);
+								y++;
+							}	
+
 							alert("Added gmo");
 						}
 
@@ -484,6 +599,19 @@ $(document).ready(function() {
 							crop_array[x][3] = crop_array[x][3] * 6;
 							money = money - store_array[array_index][1];
 							events.push("You added the '" + item_name + "' GMO to your '" + crop_array[x][0] + "' crop");
+
+							for (var i = 1; i < 99999; i++) {
+							    window.clearInterval(i);
+							    window.clearTimeout(i);
+							}
+
+							y = 0;
+							while (y < crop_array.length) {
+
+								game_loop_generator(y);
+								y++;
+							}	
+
 							alert("Added gmo");
 						}
 						x++;
@@ -496,6 +624,19 @@ $(document).ready(function() {
 							crop_array[x][5] = 100;
 							money = money - store_array[array_index][1];
 							events.push("You added the '" + item_name + "' GMO to your '" + crop_array[x][0] + "' crop");
+
+							for (var i = 1; i < 99999; i++) {
+							    window.clearInterval(i);
+							    window.clearTimeout(i);
+							}
+
+							y = 0;
+							while (y < crop_array.length) {
+
+								game_loop_generator(y);
+								y++;
+							}								
+
 							alert("Added gmo");
 						}
 						x++;
@@ -508,6 +649,19 @@ $(document).ready(function() {
 							crop_array[x][4] = 10000;
 							money = money - store_array[array_index][1];
 							events.push("You added the '" + item_name + "' GMO to your '" + crop_array[x][0] + "' crop");
+
+							for (var i = 1; i < 99999; i++) {
+							    window.clearInterval(i);
+							    window.clearTimeout(i);
+							}
+
+							y = 0;
+							while (y < crop_array.length) {
+
+								game_loop_generator(y);
+								y++;
+							}	
+
 							alert("Added gmo");
 						}
 						x++;
