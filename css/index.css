@@ -167,6 +167,23 @@ body {
 	color: #F5F1ED;
 }
 
+#deaths {
+	position: absolute;
+	margin-left: 40px;
+	margin-top: 27px;
+	font-size: 30px;
+	color: #F5F1ED;
+}
+
+#money {
+	position: absolute;
+	margin: 0 auto;
+	right: 20px;
+	top: 25px;
+	font-size: 30px;
+	color: #F5F1ED;
+}
+
 
 /*CROP MENU ---------------------------------------------*/
 #crop_container {

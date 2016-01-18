@@ -3,11 +3,12 @@ var crop_array = [["wheat", "carb", 1, 3, 3000, 100, 1], ["barley", "carb", 0, 3
 var events = ["Hello and welcome to the GMO game. In this world many bad things can happen to your crops, and this event box tells you exactly whats happening. So check this place out every once in a while."];
 
 var population = 2;
-var money = 1000000000000000;
+var money = 0;
 var intervals = [];
 
 var fully_fed = 0;
 var two_thirds_fed = 0;
+var deaths = 0;
 
 function parse_dna(dna) {
 	type = dna_split[0];
@@ -276,6 +277,8 @@ function parse_dna(dna) {
 function show_events() {
 	$("#event_content").empty();
 	$("#event_content").append("<p id='event_title'>Recent Events</p>");
+	$("#event_content").append("<p id='deaths'>D: " + deaths + "</p>");
+	$("#event_content").append("<p id='money'>" + money + "$</p>");
 
 	x = events.length;
 	while (x >= 0) {
@@ -434,12 +437,12 @@ function human_loop_generator() {
 				two_thirds_fed++;
 
 			} else if (fed_carb + fed_veg + fed_protein == 1) {
-				events.push("A person has died");
 				population--;
+				deaths++;
 
 			} else if (fed_carb + fed_veg + fed_protein == 0) {
-				events.push("A person has died");
-				population--;	
+				population--;
+				deaths++;
 			}
 
 		}
@@ -473,7 +476,7 @@ $(document).ready(function() {
 	
 	setInterval(function() {
 		show_events();
-	}, 100);
+	}, 500);
 	
 	population_counter();
 	human_loop_generator();
@@ -588,7 +591,7 @@ $(document).ready(function() {
 
 				setInterval(function() {
 					show_events();
-				}, 100);
+				}, 500);
 
 				x = 0;
 				while (x < crop_array.length) {
@@ -646,7 +649,7 @@ $(document).ready(function() {
 							
 							setInterval(function() {
 								show_events();
-							}, 100);
+							}, 500);
 
 							x = 0;
 							while (x < crop_array.length) {
@@ -677,7 +680,7 @@ $(document).ready(function() {
 							
 							setInterval(function() {
 								show_events();
-							}, 100);
+							}, 500);
 
 							x = 0;
 							while (x < crop_array.length) {
@@ -708,7 +711,7 @@ $(document).ready(function() {
 							
 							setInterval(function() {
 								show_events();
-							}, 100);
+							}, 500);
 
 							x = 0;
 							while (x < crop_array.length) {
@@ -738,7 +741,7 @@ $(document).ready(function() {
 							
 							setInterval(function() {
 								show_events();
-							}, 100);
+							}, 500);
 
 							x = 0;
 							while (x < crop_array.length) {
@@ -768,7 +771,7 @@ $(document).ready(function() {
 							
 							setInterval(function() {
 								show_events();
-							}, 100);
+							}, 500);
 
 							x = 0;
 							while (x < crop_array.length) {
