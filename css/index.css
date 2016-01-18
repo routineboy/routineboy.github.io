@@ -294,6 +294,7 @@ body {
 	margin-top: 15px;
 	border-bottom: 2px solid #252323;
 	background-color: #F5F1ED;
+	cursor: pointer;
 }
 
 .store_item_text {

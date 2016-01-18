@@ -429,15 +429,25 @@ $(document).ready(function() {
 	$("#store").click(function() {
 		$('.menu > *').remove();
 
-		$(".menu").append("<div id='#store_container'></div>");
-		store_array = [["2x food ratio multiplier", 1000], ["4x food ratio multiplier", 2000], ["Decrease production costs", 5000], ["Decrease time to harvest", 5000]];
+		$(".menu").append("<div id='store_container'></div>");
+		store_array = [["2x food ratio multiplier", 1000], ["4x food ratio multiplier", 2000], ["6x food ratio multiplier", 2000], ["Decrease production costs", 5000], ["Decrease time to harvest", 5000]];
 
 		x = 0
 		while (x < store_array.length) {
 			/*$("#crop_container").append("<div id='" + crop_array[x][0] + "_" + x + "' class='crop_item'><p id='" + crop_array[x][0] + "_text' class='crop_item_text'>&nbsp" + crop_array[x][0] + ":&nbsp&nbsp&nbspFeeding ratio: 1:" + crop_array[x][3] + "&nbsp&nbsp&nbspharvest time: " + crop_array[x][4] + "s&nbsp&nbsp&nbsp" + crop_array[x][0] + " bundles in stock: " + crop_array[x][2] + "</p></div>");*/
-			$("#store_container").append("<div id='store_item_" + String(x) + "' class='store_item'></div>");
+			$("#store_container").append("<div id='storeItem_" + x + "' class='store_item'><p class='store_item_text'>&nbsp" + store_array[x][0] + ":&nbsp&nbsp&nbspCosts: $" + store_array[x][1] + "</p></div>");
 			x++;
 		}
+
+		$(document).on("click", ".store_item", function() {
+			item = $(this).attr("id");
+			item_array = item.split("_");
+			array_index = item_array[1];
+			item_name = item[array_index][0];
+
+			purchase = confirm("Would you like to buy '" + item_name + "' for $" + item[array_index][1] + "?");
+
+		})
 
 	})
 
