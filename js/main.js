@@ -448,16 +448,15 @@ function human_loop_generator() {
 
 	/*money making*/
 	setInterval(function() {
-		
 		for (i = 0; i < population; i++) {
 			money++
 		}
-
 	}, 3000);
 
 	/*reproduction*/
 	setInterval(function() {
-		population = population + 5;
+		population_precentage = 0.25 * population;
+		population = population + Math.round(population_precentage);
 	}, 5000);	
 
 }
