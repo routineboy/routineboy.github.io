@@ -1,6 +1,6 @@
 var gmo_array = [];
-var crop_array = [["wheat", "carb", 1, 3, 3000, 100, 1], ["barley", "carb", 0, 3, 3000, 100, 0], ["corn", "carb", 0, 3, 3000, 100, 0], ["cucumber", "veg", 1, 3, 3000, 100, 1], ["tomato", "veg", 0, 3, 3000, 100, 0], ["lettuce", "veg", 0, 3, 3000, 100, 0], ["bean", "protein", 1, 3, 3000, 100, 1], ["peanut",  "protein", 0, 3, 3000, 100, 0], ["green_pea", "protein", 0, 3, 3000, 100, 0]]
-var events = ["Hello and welcome to the GMO game. In this world many bad things can happen to your crops, and this event box tells you exactly whats happening. So check this place out every once in a while."];
+var crop_array = [["wheat", "carb", 1, 3, 3000, 100, 1], ["barley", "carb", 0, 6, 4000, 500, 0], ["corn", "carb", 0, 8, 5000, 1000, 0], ["cucumber", "veg", 1, 3, 3000, 100, 1], ["tomato", "veg", 0, 6, 4000, 500, 0], ["lettuce", "veg", 0, 8, 5000, 1000, 0], ["bean", "protein", 1, 3, 3000, 100, 1], ["peanut",  "protein", 0, 6, 4000, 500, 0], ["green-pea", "protein", 0, 8, 5000, 1000, 0]];
+var events = ["Hello and welcome to the GMO game. This box here notifies you of all the current events that have occoured. Check this place out every once and a while to get the latest news."];
 
 var population = 2;
 var money = 0;
@@ -508,6 +508,7 @@ $(document).ready(function() {
 		id = id.split("_");
 		array_index = id[1];
 		product_name = id[0];
+		console.log(id);
 		purchase = confirm("Purchase '" + product_name + "'' for $" + crop_array[array_index][5] + "? you have $" + money + " in your wallet.");
 		
 		if (purchase == true) {
@@ -615,7 +616,6 @@ $(document).ready(function() {
 
 		x = 0
 		while (x < store_array.length) {
-			/*$("#crop_container").append("<div id='" + crop_array[x][0] + "_" + x + "' class='crop_item'><p id='" + crop_array[x][0] + "_text' class='crop_item_text'>&nbsp" + crop_array[x][0] + ":&nbsp&nbsp&nbspFeeding ratio: 1:" + crop_array[x][3] + "&nbsp&nbsp&nbspharvest time: " + crop_array[x][4] + "s&nbsp&nbsp&nbsp" + crop_array[x][0] + " bundles in stock: " + crop_array[x][2] + "</p></div>");*/
 			$("#store_container").append("<div id='storeItem_" + x + "' class='store_item'><p class='store_item_text'>&nbsp" + store_array[x][0] + ":&nbsp&nbsp&nbspCosts: $" + store_array[x][1] + "</p></div>");
 			x++;
 		}
