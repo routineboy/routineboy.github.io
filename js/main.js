@@ -414,13 +414,13 @@ $(document).ready(function() {
 		purchase = confirm("Add '" + gmo_name + "' to your crops list for $1000?");
 
 		if (purchase == true) {
-			if (money > 1000) {
+			if (money >= 1000) {
 				new_crop = gmo_array[array_index];
 				crop_array.push(new_crop);
 				events.push("You just created '" + gmo_name + "' for $1000");
 				delete(gmo_array[array_index]);
 			} else {
-				alert.log("YOUR TO POOR!");
+				alert("YOUR TO POOR!");
 			}
 		}
 	});
@@ -430,7 +430,7 @@ $(document).ready(function() {
 		$('.menu > *').remove();
 
 		$(".menu").append("<div id='store_container'></div>");
-		store_array = [["2x food ratio multiplier", 1000], ["4x food ratio multiplier", 2000], ["6x food ratio multiplier", 2000], ["Decrease production costs", 5000], ["Decrease time to harvest", 5000]];
+		store_array = [["2x food ratio multiplier", 1000], ["4x food ratio multiplier", 2000], ["6x food ratio multiplier", 4000], ["Decrease production costs", 5000], ["Decrease time to harvest", 5000]];
 
 		x = 0
 		while (x < store_array.length) {
@@ -439,16 +439,85 @@ $(document).ready(function() {
 			x++;
 		}
 
-		$(document).on("click", ".store_item", function() {
-			item = $(this).attr("id");
-			item_array = item.split("_");
-			array_index = item_array[1];
-			item_name = item[array_index][0];
+	});
 
-			purchase = confirm("Would you like to buy '" + item_name + "' for $" + item[array_index][1] + "?");
+	$(document).on("click", ".store_item", function() {
+		item = $(this).attr("id");
+		item_array = item.split("_");
+		array_index = item_array[1];
+		item_name = store_array[array_index][0];
 
-		})
+		purchase = confirm("Would you like to buy '" + item_name + "' for $" + store_array[array_index][1] + "? ");
+		if (purchase == true) {
+			if (money >= store_array[array_index][1]) {
+				if (array_index == 0) {
+					crop_name = prompt("Please enter the name of the product you wish to modify");
+					x = 0;
+					while (x < crop_array.length) {
+						if (crop_name == crop_array[x][0]) {
+							crop_array[x][3] = crop_array[x][3] * 2;
+							money = money - store_array[array_index][1];
+							events.push("You added the '" + item_name + "' GMO to your '" + crop_array[x][0] + "' crop");
+							alert("Added gmo");
+						}
 
-	})
+						x++;
+					}
+				} else if (array_index == 1) {
+					crop_name = prompt("Please enter the name of the product you wish to modify");
+					x = 0;
+					while (x < crop_array.length) {
+						if (crop_name == crop_array[x][0]) {
+							crop_array[x][3] = crop_array[x][3] * 4;
+							money = money - store_array[array_index][1];
+							events.push("You added the '" + item_name + "' GMO to your '" + crop_array[x][0] + "' crop");
+							alert("Added gmo");
+						}
+
+						x++;
+					}						
+				} else if (array_index == 2) {
+					crop_name = prompt("Please enter the name of the product you wish to modify");
+					x = 0;
+					while (x < crop_array.length) {
+						if (crop_name == crop_array[x][0]) {
+							crop_array[x][3] = crop_array[x][3] * 6;
+							money = money - store_array[array_index][1];
+							events.push("You added the '" + item_name + "' GMO to your '" + crop_array[x][0] + "' crop");
+							alert("Added gmo");
+						}
+						x++;
+					}				
+				} else if (array_index == 3) {
+					crop_name = prompt("Please enter the name of the product you wish to modify");
+					x = 0;
+					while (x < crop_array.length) {
+						if (crop_name == crop_array[x][0]) {
+							crop_array[x][5] = 100;
+							money = money - store_array[array_index][1];
+							events.push("You added the '" + item_name + "' GMO to your '" + crop_array[x][0] + "' crop");
+							alert("Added gmo");
+						}
+						x++;
+					}							
+				} else if (array_index == 4) {
+					crop_name = prompt("Please enter the name of the product you wish to modify");
+					x = 0;
+					while (x < crop_array.length) {
+						if (crop_name == crop_array[x][0]) {
+							crop_array[x][4] = 10000;
+							money = money - store_array[array_index][1];
+							events.push("You added the '" + item_name + "' GMO to your '" + crop_array[x][0] + "' crop");
+							alert("Added gmo");
+						}
+						x++;
+					}							
+				}
+			} else {
+				alert("YOUR TO POOR");
+			}
+		}
+
+	});
 
 });
