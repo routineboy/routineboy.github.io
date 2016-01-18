@@ -6,6 +6,9 @@ var population = 2;
 var money = 1000000000000000;
 var intervals = [];
 
+var fully_fed = 0;
+var two_thirds_fed = 0;
+
 function parse_dna(dna) {
 	type = dna_split[0];
 	type = type.split("");
@@ -271,8 +274,10 @@ function parse_dna(dna) {
 }
 
 function show_events() {
+	$("#event_content").empty();
+	$("#event_content").append("<p id='event_title'>Recent Events</p>");
+
 	x = events.length;
-	
 	while (x >= 0) {
 		if (events[x] == undefined) {
 			//do nothing
@@ -373,26 +378,106 @@ function game_loop_generator(array_index) {
 function human_loop_generator() {
 	/*food consumption*/
 	setInterval(function() {
-		
+		for (i = 0; i < population; i++) {
+			fed_carb = 0;
+			fed_veg = 0;
+			fed_protein = 0;
+
+			for (x = 0; x < crop_array.length; x++) {
+
+				if (fed_carb == 0) {
+
+					if (crop_array[x][1] == "carb") {
+						if (crop_array[x][6] == 0) {
+							//pass
+						} else {
+							crop_array[x][6] = crop_array[x][6] - 1;
+							fed_carb = 1;
+						}
+
+					}
+
+				}
+
+				if (fed_veg == 0) {
+
+					if (crop_array[x][1] == "veg") {
+						if (crop_array[x][6] == 0) {
+							//pass
+						} else {
+							crop_array[x][6] = crop_array[x][6] - 1;
+							fed_veg = 1;
+						}
+					}
+
+				}
+
+				if (fed_protein == 0) {
+
+					if (crop_array[x][1] == "protein") {
+						if (crop_array[x][6] == 0) {
+							//pass
+						} else {
+							crop_array[x][6] = crop_array[x][6] - 1;
+							fed_protein = 1;
+						}
+					}
+					
+				}
+
+			}
+
+			if (fed_carb + fed_veg + fed_protein == 3) {
+				fully_fed++;
+
+			} else if (fed_carb + fed_veg + fed_protein == 2) {
+				two_thirds_fed++;
+
+			} else if (fed_carb + fed_veg + fed_protein == 1) {
+				events.push("A person has died");
+				population--;
+
+			} else if (fed_carb + fed_veg + fed_protein == 0) {
+				events.push("A person has died");
+				population--;	
+			}
+
+		}
+
 	}, 10000);
 
 	/*money making*/
 	setInterval(function() {
+		
+		for (i = 0; i < population; i++) {
+			money++
+		}
 
-	});
+	}, 3000);
 
 	/*reproduction*/
 	setInterval(function() {
-
-	});	
+		population = population + 5;
+	}, 5000);	
 
 }
 
+function population_counter() {
+	setInterval(function() {
+		$("#pop").empty();
+		$("#pop").append("Population: " + String(population));
+	}, 100)
+}
+
 $(document).ready(function() {
-	$("#pop").append("Population: " + String(population));
 	generate_counter();
+	
+	setInterval(function() {
+		show_events();
+	}, 100);
+	
+	population_counter();
 	human_loop_generator();
-	show_events();
 
 	x = 0;
 	while (x < crop_array.length) {
@@ -500,12 +585,17 @@ $(document).ready(function() {
 				    window.clearTimeout(i);
 				}
 
+				population_counter();
+
+				setInterval(function() {
+					show_events();
+				}, 100);
+
 				x = 0;
 				while (x < crop_array.length) {
-
 					game_loop_generator(x);
 					x++;
-				}				
+				}
 
 				delete(gmo_array[array_index]);
 			} else {
@@ -553,12 +643,17 @@ $(document).ready(function() {
 							    window.clearTimeout(i);
 							}
 
-							y = 0;
-							while (y < crop_array.length) {
+							population_counter();
+							
+							setInterval(function() {
+								show_events();
+							}, 100);
 
-								game_loop_generator(y);
-								y++;
-							}	
+							x = 0;
+							while (x < crop_array.length) {
+								game_loop_generator(x);
+								x++;
+							}
 
 							alert("Added gmo");
 						}
@@ -579,11 +674,16 @@ $(document).ready(function() {
 							    window.clearTimeout(i);
 							}
 
-							y = 0;
-							while (y < crop_array.length) {
+							population_counter();
+							
+							setInterval(function() {
+								show_events();
+							}, 100);
 
-								game_loop_generator(y);
-								y++;
+							x = 0;
+							while (x < crop_array.length) {
+								game_loop_generator(x);
+								x++;
 							}	
 
 							alert("Added gmo");
@@ -605,11 +705,16 @@ $(document).ready(function() {
 							    window.clearTimeout(i);
 							}
 
-							y = 0;
-							while (y < crop_array.length) {
+							population_counter();
+							
+							setInterval(function() {
+								show_events();
+							}, 100);
 
-								game_loop_generator(y);
-								y++;
+							x = 0;
+							while (x < crop_array.length) {
+								game_loop_generator(x);
+								x++;
 							}	
 
 							alert("Added gmo");
@@ -630,12 +735,17 @@ $(document).ready(function() {
 							    window.clearTimeout(i);
 							}
 
-							y = 0;
-							while (y < crop_array.length) {
+							population_counter();
+							
+							setInterval(function() {
+								show_events();
+							}, 100);
 
-								game_loop_generator(y);
-								y++;
-							}								
+							x = 0;
+							while (x < crop_array.length) {
+								game_loop_generator(x);
+								x++;
+							}							
 
 							alert("Added gmo");
 						}
@@ -655,11 +765,16 @@ $(document).ready(function() {
 							    window.clearTimeout(i);
 							}
 
-							y = 0;
-							while (y < crop_array.length) {
+							population_counter();
+							
+							setInterval(function() {
+								show_events();
+							}, 100);
 
-								game_loop_generator(y);
-								y++;
+							x = 0;
+							while (x < crop_array.length) {
+								game_loop_generator(x);
+								x++;
 							}	
 
 							alert("Added gmo");
