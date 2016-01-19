@@ -1,6 +1,7 @@
 var gmo_array = [];
 var crop_array = [["wheat", "carb", 1, 3, 3000, 100, 1], ["barley", "carb", 0, 6, 4000, 500, 0], ["corn", "carb", 0, 8, 5000, 1000, 0], ["cucumber", "veg", 1, 3, 3000, 100, 1], ["tomato", "veg", 0, 6, 4000, 500, 0], ["lettuce", "veg", 0, 8, 5000, 1000, 0], ["bean", "protein", 1, 3, 3000, 100, 1], ["peanut",  "protein", 0, 6, 4000, 500, 0], ["green-pea", "protein", 0, 8, 5000, 1000, 0]];
 var events = ["Hello and welcome to the GMO game. This box here notifies you of all the current events that have occoured. Check this place out every once and a while to get the latest news."];
+var bonus_events = [];
 
 var population = 2;
 var money = 0;
@@ -11,7 +12,7 @@ var two_thirds_fed = 0;
 var deaths = 0;
 
 function parse_dna(dna) {
-	type = dna_split[0];
+	type = dna[0];
 	type = type.split("");
 
 	if (type.length > 3) {
@@ -65,7 +66,7 @@ function parse_dna(dna) {
 
 	type = type.join("");
 
-	harvest_time = dna_split[1];
+	harvest_time = dna[1];
 	harvest_time = harvest_time.split("");
 
 	if (harvest_time.length > 3) {
@@ -119,7 +120,7 @@ function parse_dna(dna) {
 
 	harvest_time = harvest_time.join("");
 
-	production_costs = dna_split[2];
+	production_costs = dna[2];
 	production_costs = production_costs.split("");
 
 	if (production_costs.length > 3) {
@@ -173,7 +174,7 @@ function parse_dna(dna) {
 
 	production_costs = production_costs.join("");
 
-	feeding_ratio = dna_split[3];
+	feeding_ratio = dna[3];
 	feeding_ratio = feeding_ratio.split("");
 
 	if (feeding_ratio.length > 3) {
@@ -297,7 +298,7 @@ function generate_gmos() {
 
 	x = 0
 	while (x < gmo_array.length) {
-		$("#gmo_container").append("<div id='" + gmo_array[x][0] + "_" + x + "' class='gmo_item'><p id='" + gmo_array[x][0] + "_text' class='gmo_item_text'>&nbsp" + gmo_array[x][0] + ":&nbsp&nbsp&nbspFeeding ratio: 1:" + gmo_array[x][3] + "&nbsp&nbsp&nbspharvest time: " + gmo_array[x][4] + "ms&nbsp&nbsp&nbsp" + gmo_array[x][0] + " bundles in stock: " + gmo_array[x][2] + "</p></div>");
+		$("#gmo_container").append("<div id='" + gmo_array[x][0] + "_" + x + "' class='gmo_item'><p id='" + gmo_array[x][0] + "_text' class='gmo_item_text'>&nbsp" + gmo_array[x][0] + ":&nbsp&nbsp&nbspFeeding ratio: 1:" + gmo_array[x][3] + "&nbsp&nbsp&nbspharvest time: " + gmo_array[x][4] + "ms&nbsp&nbsp&nbsp" + gmo_array[x][0] + " bundles in stock: " + gmo_array[x][2] + "&nbsp&nbsp&nbsp$" + crop_array[x][5] + "</p></div>");
 
 		if (gmo_array[x][1] == "carb") {
 			$("#" + gmo_array[x][0]  + "_text").css("color", "#D87722");
@@ -318,7 +319,7 @@ function generate_crops() {
 	
 	x = 0
 	while (x < crop_array.length) {
-		$("#crop_container").append("<div id='" + crop_array[x][0] + "_" + x + "' class='crop_item'><p id='" + crop_array[x][0] + "_text' class='crop_item_text'>&nbsp" + crop_array[x][0] + ":&nbsp&nbsp&nbspFeeding ratio: 1:" + crop_array[x][3] + "&nbsp&nbsp&nbspharvest time: " + crop_array[x][4] + "ms&nbsp&nbsp&nbsp" + crop_array[x][0] + " bundles in stock: " + crop_array[x][2] + "</p></div>");
+		$("#crop_container").append("<div id='" + crop_array[x][0] + "_" + x + "' class='crop_item'><p id='" + crop_array[x][0] + "_text' class='crop_item_text'>&nbsp" + crop_array[x][0] + ":&nbsp&nbsp&nbspFeeding ratio: 1:" + crop_array[x][3] + "&nbsp&nbsp&nbspharvest time: " + crop_array[x][4] + "ms&nbsp&nbsp&nbsp" + crop_array[x][0] + " bundles in stock: " + crop_array[x][2] + "&nbsp&nbsp&nbsp$" + crop_array[x][5] + "</p></div>");
 
 		if (crop_array[x][1] == "carb") {
 			$("#" + crop_array[x][0]  + "_text").css("color", "#D87722");
@@ -537,33 +538,81 @@ $(document).ready(function() {
 	$("#lab").click(function() {
 		$(".menu > *").remove();
 		$(".menu").append("<div id='gmo_container'></div>");
-		$(".menu").append("<input type='text'  spellcheck='false' placeholder='GMO Name' id='gmo_name'></input>");
+		$(".menu").append("<div id='gmo_name_container'></div>")
+		$("#gmo_name_container").append("<input type='text'  spellcheck='false' placeholder='GMO Name' id='gmo_name'></input>");
+		$("#gmo_name_container").append("<div id='random_generator'>Random</div>");
 		$(".menu").append("<textarea spellcheck='false' id='gmo_dna' placeholder='Enter GMO DNA'></textarea>");
 		$(".menu").append("<div id='save_gmo'>Save</div>");
 		generate_gmos();
 	});
 
+	$(document).on("click", "#random_generator", function() {
+		name = $("#gmo_name").val();
+		gmo_types = ["aat", "aac", "aag"];
+		dna_letters = ["a", "c", "t", "g"];
+
+		if (name == "") {
+			alert("Please name your gmo");
+		} else {
+			random_num_type = Math.floor((Math.random() * 3));
+			dna = gmo_types[random_num_type] + ",";
+			x = 0
+			
+			while (x < 3) {
+				y = 0;
+				var codon = "";
+				while (y < 3) {
+					random_num = Math.floor((Math.random() * 3));
+					codon = codon.concat(dna_letters[random_num]);		
+
+					y++;
+				}
+
+				if (x == 2) {
+					dna = dna.concat(codon);
+				} else {
+					dna = dna.concat(codon + ",");
+				}
+
+				x++;
+
+			}
+
+			$("#gmo_dna").val(dna);
+			dna = dna.split(",");
+			parse_dna(dna);
+			generate_gmos();
+
+		}	
+
+	});
+
 	$(document).on("click", "#save_gmo", function() {
 		name = $("#gmo_name").val();
-		dna = $("#gmo_dna").val();
-		dna = dna.toLowerCase();
-		dna_split = dna.split(",");
-
-		if (dna_split.length > 4) {
-			type = dna_split[0];
-			harvest_time = dna_split[1];
-			production_costs = dna_split[2];
-			feeding_ratio = dna_split[3];
-			virus_dna = dna_split[4];
-
-			dna_split = [dna_split[0], dna_split[1], dna_split[2], dna_split[3]];
-			parse_dna(dna_split);
-			generate_gmos();
-
+		
+		if (name == "") {
+			alert("Please name your gmo");
 		} else {
-			parse_dna(dna_split);
-			generate_gmos();
-			console.log(gmo_array);
+			dna = $("#gmo_dna").val();
+			dna = dna.toLowerCase();
+			dna_split = dna.split(",");
+
+			if (dna_split.length > 4) {
+				type = dna_split[0];
+				harvest_time = dna_split[1];
+				production_costs = dna_split[2];
+				feeding_ratio = dna_split[3];
+				virus_dna = dna_split[4];
+
+				dna_split = [dna_split[0], dna_split[1], dna_split[2], dna_split[3]];
+				parse_dna(dna_split);
+				generate_gmos();
+
+			} else {
+				parse_dna(dna_split);
+				generate_gmos();
+				console.log(gmo_array);
+			}
 		}
 
 	});

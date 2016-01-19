@@ -215,17 +215,27 @@ body {
 
 
 /*LAB MENU ----------------------------------------------------*/
-#gmo_name {
+#gmo_name_container {
 	position: absolute;
 	top: 150px;
+	left: 0px;
+	width: 90%;
+	height: 50px;
+}
+
+#gmo_name {
+	position: absolute;
+	top: 0px;
+	float: left;
 }
 
 #gmo_name[type="text"] {
   display: block;
   margin: 0 auto;
+  float: left;
   right: 0;
   left: 0;
-  width: 90%;
+  width: 75%;
   font-family: sans-serif;
   font-size: 18px;
   appearance: none;
@@ -235,6 +245,21 @@ body {
 
 #gmo_name[type="text"]:focus {
   outline: none;
+}
+
+#random_generator {
+	width: 10%;
+	height: 27px;
+	float: right;
+	top: 0px;
+	color: #F5F1ED;
+	background-color: #70798C;
+	text-align: center;
+	padding-top: 3px;
+ 	-webkit-box-sizing: border-box; 
+ 	-moz-box-sizing: border-box;    
+ 	box-sizing: border-box; 
+ 	cursor: pointer;
 }
 
 #gmo_dna {
