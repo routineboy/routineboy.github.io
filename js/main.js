@@ -502,7 +502,7 @@ $(document).ready(function() {
 
 		events.push(bonus_events[random]);
 
-	}, 1000);
+	}, 45000);
 	
 	setInterval(function() {
 		show_events();
