@@ -1,7 +1,6 @@
 var gmo_array = [];
 var crop_array = [["wheat", "carb", 1, 3, 3000, 100, 1], ["barley", "carb", 0, 6, 4000, 500, 0], ["corn", "carb", 0, 8, 5000, 1000, 0], ["cucumber", "veg", 1, 3, 3000, 100, 1], ["tomato", "veg", 0, 6, 4000, 500, 0], ["lettuce", "veg", 0, 8, 5000, 1000, 0], ["bean", "protein", 1, 3, 3000, 100, 1], ["peanut",  "protein", 0, 6, 4000, 500, 0], ["green-pea", "protein", 0, 8, 5000, 1000, 0]];
 var events = ["Hello and welcome to the GMO game. This box here notifies you of all the current events that have occoured. Check this place out every once and a while to get the latest news."];
-var bonus_events = [];
 
 var population = 2;
 var money = 0;
@@ -474,6 +473,36 @@ function population_counter() {
 
 $(document).ready(function() {
 	generate_counter();
+
+	setInterval(function() {
+		var bonus_events = ["Trump descends from the heavens and blesses your crops food ratio is increased.", "Kim jung un decreases production time.", "Hipsters spread bad GMO publicity production costs increase.", "Putin supports your crops", "Shia labeouf motivates your farmers"];
+		random = Math.floor((Math.random() * bonus_events.length));
+
+		if (random == 0) {
+			for (x = 0; x < crop_array.length; x++) {
+				crop_array[x][3] = crop_array[x][3] + 20; 
+			}
+		} else if (random == 1) {
+			for (x = 0; x < crop_array.length; x++) {
+				crop_array[x][4] = crop_array[x][4] - 100; 
+			}
+		} else if (random == 2) {
+			for (x = 0; x < crop_array.length; x++) {
+				crop_array[x][5] = crop_array[x][5] + 200; 
+			}
+		} else if (random == 3) {
+			for (x = 0; x < crop_array.length; x++) {
+				crop_array[x][2] = crop_array[x][2] - 5; 
+			}
+		} else if (random == 4 {
+			for (x = 0; x < crop_array.length; x++) {
+				crop_array[x][4] = crop_array[x][4] - 100; 
+			}
+		}
+
+		events.push(bonus_events[random]);
+
+	}, 1000);
 	
 	setInterval(function() {
 		show_events();
