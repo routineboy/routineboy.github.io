@@ -494,7 +494,7 @@ $(document).ready(function() {
 			for (x = 0; x < crop_array.length; x++) {
 				crop_array[x][2] = crop_array[x][2] - 5; 
 			}
-		} else if (random == 4 {
+		} else if (random == 4) {
 			for (x = 0; x < crop_array.length; x++) {
 				crop_array[x][4] = crop_array[x][4] - 100; 
 			}
