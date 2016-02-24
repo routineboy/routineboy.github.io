@@ -9,27 +9,12 @@
 	color: #252323;
 }
 
-html, body {
-	height: 100%;
-	margin: 0;
-}
-
-/*BACKGROUND DIVS*/
-#background_div_1 {
-	background: url('../img/background_1.jpg');
+body {
+	background: url('../img/background.jpg') no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;	
-	position: absolute;
 	height: 100%;
-	width: 100%;
-	transition: 1s ease-in-out;
-}
-
-#background_div_2 {
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	transition: 1s ease-in-out;
+	margin: 0;
 }
