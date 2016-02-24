@@ -1,20 +1,35 @@
-/*General settings and fonts*/
+/*GENERAL SETTINGS*/
 @font-face {
 	font-family: Gidoli;
 	src: url("../fonts/GidoleFont/Gidole-Regular.ttf");
 }
 
-@font-face {
-	font-family: Jaapokki;
-	src: url("../fonts/Jaapokki/Regular/web/jaapokki-regular.ttf");
-}
-
-@font-face {
-	font-family: Jaapokki-Enhanced;
-	src: url("../fonts/Jaapokki/enchance/web/jaapokkienchance-regular.ttf");
-}
-
 * {
 	font-family: Gidoli;
 	color: #252323;
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+/*BACKGROUND DIVS*/
+#background_div_1 {
+	background: url('../img/background_1.jpg');
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;	
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	transition: 1s ease-in-out;
+}
+
+#background_div_2 {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	transition: 1s ease-in-out;
 }
