@@ -1,0 +1,56 @@
+/*GENERAL SETTINGS*/
+@font-face {
+	font-family: Gidoli;
+	src: url("../fonts/GidoleFont/Gidole-Regular.ttf");
+}
+
+* {
+	font-family: Gidoli;
+	color: #252323;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	background: url('../img/background.jpg') no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+/*MAIN CONTAINER*/
+.topic_divs {
+	position: relative;
+	height: 60em;
+	width: 90%;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	top: 5em;
+	margin-bottom: 5em;
+	background-color: #D6D5C9;
+	border: 2px solid #D16666;
+}
+
+#title {
+	text-align: center;
+	font-size: 50px;
+	font-weight: 900;
+}
+
+.title_images_container {
+	position: absolute;
+	left: 1.5px;
+}
+
+.title_imgs {
+	position: relative;
+	height: 170px;
+	width: 170px;
+	top: -10px;
+	margin-left: 0;
+	margin-right: 0;
+}
